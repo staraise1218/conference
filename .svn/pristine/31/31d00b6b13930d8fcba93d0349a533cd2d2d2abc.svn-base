@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>服务列表</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="../css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<link rel="stylesheet" type="text/css" href="../css/list.css"/> 
+	<link rel="stylesheet" type="text/css" href="../css/service.css"/> 
+	<link rel="stylesheet" type="text/css" href="../js/jqueryPagination/css/jquery.pagination.css"/> 
+	
+	<script type="text/javascript" src="../js/Global.js"></script>
+</head>
+<body>
+	<header>
+		<div class="header_logo ac fl">LOGO</div>
+		<ul class="header_menu">
+			<li><a href="../member/index.html">首页</a></li>
+			<!-- <li><a href="index_detail.html">会议室预定</a></li> -->
+			<li><a href="../member/index_list.html">我的预订</a></li>
+			<li><a href="service.html" class="header_menu_act">服务管理</a></li>
+		</ul>
+		<div class="fr">
+			<div class="header_search" style="visibility: hidden;">
+				<span class="iconfont icon-sousuo"></span>
+				<input type="text" name="" placeholder="搜索会议室">
+			</div>
+			<div class="header_icon">
+				<span class="iconfont icon-xiaoxi"></span>
+				<div class="dian"></div>
+				<ul class="xiaoxi" style="display: none;" id="xiaoxi">
+					<!-- <li>
+						<div class="xiaoxi_name clearfix">
+							
+							<span class="xiaoxi_date fr">时间</span>
+						</div>
+						<div class="xiaoxi_content">管理员提醒你，你的预定申请已经通过。</div>
+					</li> -->
+				</ul>
+			</div>
+			<div class="header_pic"><img src="/images/pic.jpg"></div>
+			<div class="header_icon">
+				<span class="iconfont icon-tuichu"></span>
+			</div>
+		</div>
+		<div style="clear: both;"></div>
+	</header>
+	<div class="main">
+		<div class="myLeft fl">
+			<div class="myLeft_room">
+				<div class="myLeft_room_title ac">服务筛选</div>
+				<div class="myLeft_tabCon">
+					<ul class="myLeft_tabCon_list">
+						<li>
+							<select id="rname">
+								<option value="">会议室名称</option>
+							</select>
+						</li>
+						<li><input type="text" id="config-demo" class="form-control"></li>
+						<li>
+							<select id="pname">
+								<option value="">预订人</option>
+							</select>
+						</li>
+						<li>
+							<select id="otakeorder">
+								<!-- <option>服务状态</option> -->
+								<option value="">全部</option>
+								<option value="1">未处理</option>
+								<option value="2">处理中</option>
+								<option value="3">已完成</option>
+							</select>
+						</li>
+						<li style="padding: 0;"><input class="tabCon_btn" id="searchBtn" type="submit" name="" value="确 认"></li>
+					</ul>
+				</div>	
+			</div>
+		</div>
+
+		<div class="content">
+			<ul class="button_box">
+				<li><a href="service.html">首页</a></li>
+				<li><a href="javascript:void(0)">服务列表</a></li>
+				<li><a href="service_manage.html">会议室管理</a></li>
+				<div style="clear: both;"></div>
+			</ul>
+			<div class="list_content">
+				<div class="table_caption"></div>
+				<table class="list_table">
+					<thead class="list_table_title">
+						<tr>
+							<td>会议室名称</td>
+							<td>预定时间</td>
+							<td>对接时间</td>
+							<td>服务状态</td>
+							<td>预定人</td>
+							<td>预定人电话</td>
+							<td>星级评价</td>
+							<td class="list_table_btn">操作</td>
+						</tr>
+					</thead>
+					<tbody id="serviceList">
+						<!-- <tr>
+							<td>8号楼 5层 512室</td>
+							<td>2018-08-13 <br>08：00--10：30</td>
+							<td>2018-08-13 <br>08：00--10：30</td>
+							<td class="list_table_s">未处理</td>
+							<td class="list_table_s">XXX</td>
+							<td>13612341234</td>
+							<td>
+								<ul class="list_table_star">
+									<li><span class="iconfont icon-xingxing icon_pre"></span></li>
+									<li><span class="iconfont icon-xingxing icon_pre"></span></li>
+									<li><span class="iconfont icon-xingxing icon_pre"></span></li>
+									<li><span class="iconfont icon-xingxing icon_pre"></span></li>
+									<li><span class="iconfont icon-xingxing"></span></li>
+								</ul>
+							</td>
+							<td class="list_table_btn">
+								<button>查看</button>
+								<button>完成</button>
+								<button>打印</button>
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+				<div class="ar clearfix" style="margin-top:10px;">
+					<div id="pagination3" class="page fr"></div>
+				</div>
+				
+			</div>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+	
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/moment.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.js"></script>
+	<script type="text/javascript" src="../js/jqueryPagination/js/jquery.pagination.min.js"></script>
+	
+	<script type="text/javascript" src="../js/service-service_list.js"></script>
+</body>
+</html>

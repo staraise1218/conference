@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>首页-会议室预定</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="../css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<link rel="stylesheet" type="text/css" href="../css/login.css">
+
+	<script src="../js/Global.js"></script>
+</head>
+
+<body>
+	<header>
+		<div class="header_logo ac fl">LOGO</div>
+		<!-- <ul class="header_menu">
+			<li><a href="index.html">首页</a></li>
+			<li><a href="index_detail.html">会议室预定</a></li>
+			<li><a href="index_list.html">我的预订</a></li>
+		</ul>
+		<div class="fr">
+			<div class="header_search">
+				<span class="iconfont icon-sousuo"></span>
+				<input type="text" name="" placeholder="搜索会议室">
+			</div>
+			<div class="header_icon">
+				<span class="iconfont icon-xiaoxi"></span>
+				<div class="dian"></div>
+			</div>
+			<div class="header_pic"><img src="images/pic.jpg"></div>
+			<div class="header_icon">
+				<span class="iconfont icon-tuichu"></span>
+			</div>
+		</div> -->
+		<div style="clear: both;"></div>
+	</header>
+	<div class="main">
+		<div class="ac">
+			<div class="login_line"></div>
+			<div class="login_title ac">用 户 登 陆</div>
+			<div class="login_item">
+				<input id="name" type="text" name="" placeholder="用户名：">
+			</div>
+			<div class="login_item">
+				<input id="password" type="password" name="" placeholder="密码：">
+			</div>
+			<div class="login_item">
+				<a class="login_btn ac" id="loginBtn" href="javascript:void(0)">登陆</a>
+				<a class="login_forget" href="forget.html">忘记密码?</a>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/moment.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
+	<script>
+		//方法-------------------------------------------
+		//登录
+		function login() {
+			//获取用户名密码
+			let name = document.getElementById("name").value
+			let password = document.getElementById("password").value
+			if (name == "" || password == "") {
+				alert("登录信息请填写完整")
+				return
+			}
+			let postData = {
+				interfaceNum: "1", //暂时默认
+				userNames: name,
+				password: password,
+			}
+			console.log(postData)
+			Global.openLoading()
+			$.ajax({
+				url: `${Global.host}/user/login?interfaceNum=${postData.interfaceNum}&userNames=${postData.userNames}&password=${postData.password}`,
+				success: function (res) {
+					console.log(res)
+
+					//1.普通用户 2.主管部门 3.服务部门 4.没有权限的 5.管理员 6.用户不存在
+
+					getMyInfo(function(){
+						Global.closeLoading()
+						// return //测试用
+						if (Number(res) == 6) {
+							alert("用户不存在")
+						} else {
+							//保存用户信息
+							localStorage.setItem("userRight", res)
+							//跳转页面
+							let url = ""
+							switch (Number(res)) {
+								case 1:
+									url = "../member/index.html"
+									break
+								case 2:
+									url = "../approval/approval.html"
+									break
+								case 3:
+									url = "../service/service.html"
+									break
+								case 4:
+									// alert("该用户没有权限")
+									url = "../member/index.html"
+									break
+								case 5:
+									//管理员页面？
+									break
+								default:
+									break
+							}
+							console.log(url)
+							// return
+							window.location.href = url
+						}
+					})
+				}
+			})
+		}
+		//获取我的信息
+		function getMyInfo(callback){
+			$.ajax({
+				url: Global.host+"/user/outPutSession",
+				success: function (res) {
+					console.log(res)
+					//保存自己的用户信息到localstorage
+					var mUserInfo=res
+					localStorage.setItem("mUserInfo",JSON.stringify(mUserInfo))
+
+					callback()
+				}
+			})
+		}
+		$(function () {
+			//点击登录
+			document.getElementById("loginBtn").onclick = function () {
+				login()
+			}
+		})
+	</script>
+</body>
+
+</html>

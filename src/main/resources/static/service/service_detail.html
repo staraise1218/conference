@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>服务详情</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="../css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<link rel="stylesheet" type="text/css" href="../css/detail.css">
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/moment.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.js"></script>
+	<script src="../js/Global.js"></script>
+	<style>
+		#serPersonWrap{
+			display: flex;
+			justify-content: space-around;
+			flex-wrap: wrap;
+		}
+		.serPersonItem{
+			font-weight: normal;
+			flex: 0 0 30%;
+			display: flex;
+			align-items: center;
+			cursor: pointer;
+		}
+		.serPersonItem>input{
+			margin: 0 10px 0 0;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<div class="header_logo ac fl">LOGO</div>
+		<ul class="header_menu">
+			<li><a href="../member/index.html">首页</a></li>
+			<!-- <li><a href="index_detail.html">会议室预定</a></li> -->
+			<li><a href="../member/index_list.html">我的预订</a></li>
+			<li><a href="service.html" class="header_menu_act">服务管理</a></li>
+		</ul>
+		<div class="fr">
+			<div class="header_search" style="visibility:hidden;">
+				<span class="iconfont icon-sousuo"></span>
+				<input type="text" name="" placeholder="搜索会议室">
+			</div>
+			<div class="header_icon">
+				<span class="iconfont icon-xiaoxi"></span>
+				<div class="dian"></div>
+				<ul class="xiaoxi" style="display: none;" id="xiaoxi">
+					<!-- <li>
+						<div class="xiaoxi_name clearfix">
+							
+							<span class="xiaoxi_date fr">时间</span>
+						</div>
+						<div class="xiaoxi_content">管理员提醒你，你的预定申请已经通过。</div>
+					</li> -->
+				</ul>
+			</div>
+			<div class="header_pic"><img src="../images/pic.jpg"></div>
+			<a class="header_icon" href="/user/dropout"><span class="iconfont icon-tuichu"></span></a>
+		</div>
+		<div style="clear: both;"></div>
+	</header>
+
+	<div class="main" style="padding: 0;">
+		<!-- <ul class="button_box clearfix">
+			<li><a href="approval.html">首页</a></li>
+			<li><a href="approval_list.html">审批列表</a></li>
+			<li><a href="approval_count.html">服务统计</a></li>
+		</ul> -->
+		<div class="list_content">
+			<div class="detail_title ac">会议室预定信息</div>
+			<!-- 会议室基本信息 -->
+			<table class="detail_table">
+				<caption>会议基本信息</caption>
+				<tr>
+					<td class="detail_name">会议主题</td>
+					<td class="detail_input" colspan="3"><input type="text" name="" id="ocsourcename" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td class="detail_name">会议室</td>
+					<td class="detail_input"><input type="text" name="" id="rname" readonly="readonly"></td>
+					<td class="detail_name">会议时间</td>
+					<td class="detail_input"><input type="text" name="" id="meetingtime" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td class="detail_name">参会人数</td>
+					<td class="detail_input"><input type="text" name="" id="ocnum" readonly="readonly"></td>
+					<td class="detail_name">是否重复预定</td>
+					<td class="al">
+						<label style="margin: 0;font-weight:normal;cursor:pointer;">
+							<input class="detail_input_radio" type="radio" name="order" value="2" data-value="重复" disabled="disabled" style="cursor:pointer;"
+							 id="isRepeat"> 是
+						</label>
+						<label style="margin: 0;font-weight:normal;cursor:pointer;">
+							<input class="detail_input_radio" type="radio" name="order" value="1" data-value="不重复" disabled="disabled" style="cursor:pointer;">
+							否
+						</label>
+					</td>
+				</tr>
+				<tr class="repeatTr" style="display:none;">
+					<td class="detail_name">预定重复类型</td>
+					<td class="detail_input">
+						<select class="detail_select" id="unit">
+							<option value="1">每天</option>
+							<option value="2">每周</option>
+							<option value="3">每月</option>
+						</select>
+					</td>
+					<td class="detail_name">重复次数</td>
+					<td class="detail_input"><input type="text" name="" id="num"></td>
+				</tr>
+				<tr class="repeatTr" style="display:none;">
+					<td class="detail_name">开始日期</td>
+					<td class="detail_input"><input type="text" name="" readonly="readonly" id="startDate"></td>
+					<td class="detail_name">结束日期</td>
+					<td class="detail_input"><input type="text" name="" readonly="readonly" id="endDate"></td>
+				</tr>
+				<tr>
+					<td class="detail_name">会议预定联系人</td>
+					<td class="detail_input"><input type="text" name="" id="ocreservename" readonly="readonly"></td>
+					<td class="detail_name">联系方式</td>
+					<td class="detail_input"><input type="text" name="" id="ocreservephone" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td class="detail_name">会议使用联系人</td>
+					<td class="detail_input"><input type="text" name="" id="ocusename" readonly="readonly"></td>
+					<td class="detail_name">联系方式</td>
+					<td class="detail_input"><input type="text" name="" id="ocusephone" readonly="readonly"></td>
+				</tr>
+			</table>
+			<!-- 会议补充信息 -->
+			<table class="detail_table">
+				<caption>会议补充信息</caption>
+				<tr>
+					<td class="detail_name">预定台型</td>
+					<td class="detail_input">
+						<!-- <select class="detail_select" id="taixingSelect">
+						</select> -->
+						<input type="text" name="" id="taixingSelect" readonly="readonly">
+					</td>
+					<td class="detail_name" colspan="2"></td>
+					<!-- <td class="detail_input"><input type="text" name=""></td> -->
+				</tr>
+				<tr>
+					<td class="detail_name">是否与服务人员对接</td>
+					<td class="al">
+						<label style="margin: 0;font-weight:normal;cursor:pointer;">
+							<input class="detail_input_radio" type="radio" name="order2" id="ocdockingstate1" disabled="disabled" style="cursor:pointer;">
+							是
+						</label>
+						<label style="margin: 0;font-weight:normal;cursor:pointer;">
+							<input class="detail_input_radio" type="radio" name="order2" id="ocdockingstate2" disabled="disabled" style="cursor:pointer;">
+							否
+						</label>
+					</td>
+					<td class="detail_name">对接时间</td>
+					<td class="detail_input"><input type="text" name="" id="ocdockingtime" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td class="detail_name">会议物资联系人</td>
+					<td class="detail_input"><input type="text" name="" id="ocmaterialsname" readonly="readonly"></td>
+					<td class="detail_name">联系方式</td>
+					<td class="detail_input"><input type="text" name="" id="ocmaterialsphone" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td class="detail_table_title al" colspan="4">车位预留情况</td>
+				</tr>
+				<tr>
+					<td class="detail_name">大车位数量</td>
+					<td class="detail_input"><input type="text" name="" id="ocbigcarnum" readonly="readonly"></td>
+					<td class="detail_name">小车位数量</td>
+					<td class="detail_input"><input type="text" name="" id="ocsmallnum" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td class="detail_table_title al" colspan="4">会议布展情况</td>
+				</tr>
+				<tr>
+					<td class="detail_name">展台</td>
+					<td class="detail_input"><input type="text" name="" id="ocshowplatform" readonly="readonly"></td>
+					<td class="detail_name">展架</td>
+					<td class="detail_input"><input type="text" name="" id="ocshowshelf" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td class="detail_name">用电功率</td>
+					<td class="detail_input"><input type="text" name="" id="ocpower" readonly="readonly"></td>
+					<td class="detail_name" colspan="2"></td>
+					<!-- <td class="detail_input"><input type="text" name=""></td> -->
+				</tr>
+			</table>
+			<table class="detail_table detail_table2">
+				<tr>
+					<td class="detail_table_title al" colspan="6">桌签及椅背签顺序</td>
+				</tr>
+				<tr>
+					<td class="detail_input"><input type="text" name=""></td>
+					<td class="detail_input"><input type="text" name=""></td>
+					<td class="detail_input"><input type="text" name=""></td>
+					<td class="detail_input"><input type="text" name=""></td>
+					<td class="detail_input"><input type="text" name=""></td>
+					<td class="detail_input"><input type="text" name=""></td>
+				</tr>
+				<tr>
+					<td class="detail_input"><input type="text" name=""></td>
+					<td class="detail_input"><input type="text" name=""></td>
+					<td class="detail_input"><input type="text" name=""></td>
+					<td class="detail_input"><input type="text" name=""></td>
+					<td class="detail_input"><input type="text" name=""></td>
+					<td class="detail_input"><input type="text" name=""></td>
+				</tr>
+				<tr>
+					<td class="detail_name">附件</td>
+					<td class="detail_input detail_textarea" colspan="5"><textarea rows="3" readonly="readonly"></textarea></td>
+				</tr>
+				<tr>
+					<td class="detail_name">备注</td>
+					<td class="detail_input detail_textarea" colspan="5"><textarea rows="3" id="ocremark" readonly="readonly"></textarea></td>
+				</tr>
+			</table>
+			<!-- 新增物品 -->
+			<!-- <button class="detail_btn ac">添加基础会议物品</button> -->
+			<table class="detail_table">
+				<caption>基础会议物品</caption>
+				<thead>
+					<tr>
+						<td class="detail_name">物品</td>
+						<td class="detail_name">数量</td>
+						<!-- <td class="detail_name">操作</td> -->
+					</tr>
+				</thead>
+				<tbody id="baseGoods">
+				</tbody>
+			</table>
+			<!-- <button class="detail_btn ac">添加增值会议物品</button> -->
+			<table class="detail_table">
+				<caption>增值会议物品</caption>
+				<thead>
+					<tr>
+						<td class="detail_name">物品</td>
+						<td class="detail_name">单价</td>
+						<td class="detail_name">数量</td>
+						<td class="detail_name">总计</td>
+						<!-- <td class="detail_name">操作</td> -->
+					</tr>
+				</thead>
+				<tbody id="addGoods">
+				</tbody>
+			</table>
+			<!-- 服务人员指派 -->
+			<button class="detail_btn ac" id="openSerPerson">服务人员指派</button>
+			<table class="detail_table">
+				<caption>服务人员信息</caption>
+				<thead>
+					<tr>
+						<td class="detail_name">服务人员</td>
+						<td class="detail_name">联系方式</td>
+						<td class="detail_name">操作</td>
+					</tr>
+				</thead>
+				<tbody id="serPerTbody">
+				</tbody>
+			</table>
+
+			<div class="ac bottom_btn">
+				<button class="detail_btn" id="passBtn">提 交</button>
+				<button class="detail_btn cancel_btn" id="back">取 消</button>
+			</div>
+		</div>
+	</div>
+	<!-- 服务人员弹窗 -->
+	<div class="modal fade" id="myServicePerson" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 0!important;min-width: 1280px;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="add_title modal-title" id="myModalLabel">添加服务人员</h4>
+				</div>
+				<div class="modal-body add_body" id="serPersonWrap">
+					<!-- - -->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn1" id="addServicePerson">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 服务人员弹窗 end -->
+
+
+	<script src="../js/member-index_look.js"></script>
+	<script type="text/javascript">
+		//全局变量
+		var serPersonArr=[]
+
+		function eventsBind() {
+			//点击通过
+			document.getElementById("passBtn").onclick = function () {
+				assignSerPerson(function(){
+					approve(2)
+				})
+			}
+			//点击服务人员指派
+			$("#openSerPerson").click(function(){
+				getServicePerson(function(res){
+					var personArr=res.staffList //服务人员数组
+					console.log(personArr)
+					//向弹出框中增加服务人员
+					updatePersonDom(personArr)
+					$("#myServicePerson").modal("show")	
+				})
+			})
+			//点击弹框里的服务人员 更新serPersonArr
+			$("#serPersonWrap").delegate("input","click",function(){
+				console.log($(this).is(':checked'))
+				if($(this).is(':checked')&&serPersonArr.length>=5){ //?
+					alert("最多选择5个服务人员")
+					return false
+				}
+				serPersonArr=[]
+				$("#serPersonWrap input").each(function(){
+					if(this.checked){
+						var obj={
+							id:this.value,
+							mobile:this.getAttribute("data-mobile"),
+							name:$(this).siblings(".serPersonName").html()
+						}
+						serPersonArr.push(obj)
+					}
+				})
+				console.log(serPersonArr)
+			})
+			//点击弹框的确定
+			$("#addServicePerson").click(function(){
+				serPersonArrToDom()
+				$("#myServicePerson").modal("hide")	
+			})
+			//点击服务人员的删除
+			$("#serPerTbody").delegate(".deleteSerPerBtn","click",function(){
+				var thisId=this.getAttribute("data-id")
+				var result=confirm("确定删除该服务人员？")
+				if(result){
+					var index
+					serPersonArr.forEach(function(obj,indextemp){
+						if(obj.id==thisId){
+							index=indextemp
+						}	
+					})
+					serPersonArr.splice(index,1)
+					console.log(serPersonArr)
+					//绘制
+					serPersonArrToDom()
+				}
+			})
+		}
+		//更新服务人员dom（绘制）
+		function serPersonArrToDom(){
+			var serPerTbody=document.getElementById("serPerTbody")
+			if(serPersonArr.length>0){
+				serPerTbody.innerHTML=""
+				serPersonArr.forEach(function(obj){
+					var tr=document.createElement("tr")
+					tr.innerHTML=	'<td class="detail_input">'+obj.name+'</td>'+
+									'<td class="detail_input">'+obj.mobile+'</td>'+
+									'<td class="detail_input detail_btn_s">'+
+										'<button class="detail_btn_del deleteSerPerBtn">删 除</button>'+
+									'</td>';
+					serPerTbody.appendChild(tr)
+				})
+			}else{
+				serPerTbody.innerHTML=""
+			}
+		}
+		function updatePersonDom(arr){
+			//清空
+			$("#serPersonWrap").html("")
+			if(arr.length>0){
+				var serPersonWrap=document.getElementById("serPersonWrap")
+				arr.forEach(function(obj){
+					var label=document.createElement("label")
+					label.className="serPersonItem"
+					label.innerHTML='<input type="checkbox" name="serPerson" value="'+obj.id+'" data-mobile="'+obj.mobile+'"><span class="serPersonName">'+obj.name+'</span>'
+					serPersonWrap.appendChild(label)
+				})
+			}
+		}
+		//拒绝 通过 （提交）
+		function approve(otakeorder) {
+			var postData = {
+				oid: Detail.oid,
+
+				otakeorder: otakeorder, //（otakeorder状态为3）或者接单按钮（otakeorder状态为2） 数据库默认为1（未接单）
+			}
+			console.log(postData)
+			$.ajax({
+				type: "POST",
+				url: Global.host + "/order/updateServiceComplete",
+				data: postData,
+				success: function (res) {
+					Global.closeLoading()
+					console.log(res)
+					//审批后？？？？？
+					$('#myReject').modal('hide')
+					alert("操作成功")
+					window.history.back(-1)
+				}
+			})
+		}
+		//获取服务人员
+		function getServicePerson(callback){
+			Global.openLoading()
+			$.ajax({
+				url: Global.host + "/servicepeo/selectServicepeoByOther",
+				success: function (res) {
+					Global.closeLoading()
+					console.log(res)
+					callback(res)
+				}
+			})
+		}
+		//给订单增加服务人员
+		function assignSerPerson(callback){
+			Global.openLoading()
+			if(serPersonArr.length>0){
+				var idArr=[]
+				serPersonArr.forEach(function(obj){
+					idArr.push(obj.id)
+				})
+				var postData = {
+					ocid: Detail.ocid,
+					id: idArr,
+				}
+				console.log(postData)
+				$.ajax({
+					type: "POST",
+					url: Global.host + "/servicepeo/insertServiceOrder",
+					data: postData,
+					success: function (res) {
+						console.log(res)
+						callback()
+					}
+				})
+			}else{
+				callback()
+			}
+		}
+		$(function () {
+			Global.getMessageByLing()
+			//------------------
+			eventsBind()
+		})
+	</script>
+</body>
+
+</html>

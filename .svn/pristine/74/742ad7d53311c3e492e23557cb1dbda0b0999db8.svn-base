@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>预定详情用于对接时间</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.css">
+	<link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<link rel="stylesheet" type="text/css" href="../css/detail.css">
+
+	<script src="../js/Global.js"></script>
+</head>
+<body>
+	<header>
+		<div class="header_logo ac fl">LOGO</div>
+		<ul class="header_menu">
+			<li><a href="index.html">首页</a></li>
+			<li><a href="index_list.html">我的预订</a></li>
+			
+			<li id="approTab" style="display:none;"><a href="../approval/approval.html">审批管理</a></li>
+			<li id="serviceTab" style="display:none;"><a href="../service/service.html">服务管理</a></li>
+		</ul>
+		<div class="fr">
+			<div class="header_search" style="visibility:hidden;">
+				<span class="iconfont icon-sousuo"></span>
+				<input type="text" name="" placeholder="搜索会议室">
+			</div>
+			<div class="header_icon">
+				<span class="iconfont icon-xiaoxi"></span>
+				<div class="dian"></div>
+				<ul class="xiaoxi" style="display: none;" id="xiaoxi">
+					<!-- <li>
+						<div class="xiaoxi_name clearfix">
+							
+							<span class="xiaoxi_date fr">时间</span>
+						</div>
+						<div class="xiaoxi_content">管理员提醒你，你的预定申请已经通过。</div>
+					</li> -->
+				</ul>
+			</div>
+			<div class="header_pic"><img src="../images/pic.jpg"></div>
+			<a class="header_icon" href="/user/dropout"><span class="iconfont icon-tuichu"></span></a>
+		</div>
+		<div style="clear: both;"></div>
+	</header>
+	<div class="main" style="background-color: #fff;">
+		<div class="detail_title ac">会议室预定信息</div>
+		<!-- 会议室基本信息 -->
+		<table class="detail_table">
+			<caption>会议基本信息</caption>
+			<tr>
+				<td class="detail_name">会议主题</td>
+				<td class="detail_input" colspan="3"><input type="text" name="" id="ocsourcename" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td class="detail_name">会议室</td>
+				<td class="detail_input"><input type="text" name="" id="rname" readonly="readonly"></td>
+				<td class="detail_name">会议时间</td>
+				<td class="detail_input"><input type="text" name="" id="meetingtime" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td class="detail_name">参会人数</td>
+				<td class="detail_input"><input type="text" name="" id="ocnum" readonly="readonly"></td>
+				<td class="detail_name">是否重复预定</td>
+				<td class="al">
+					<label style="margin: 0;font-weight:normal;cursor:pointer;">
+						<input class="detail_input_radio" type="radio" name="order" value="2" data-value="重复" disabled="disabled" style="cursor:pointer;" id="isRepeat"> 是
+					</label>
+					<label style="margin: 0;font-weight:normal;cursor:pointer;">
+						<input class="detail_input_radio" type="radio" name="order" value="1" data-value="不重复" disabled="disabled" style="cursor:pointer;"> 否
+					</label>
+				</td>
+			</tr>
+			<tr class="repeatTr" style="display:none;">
+				<td class="detail_name">预定重复类型</td>
+				<td class="detail_input">
+					<select class="detail_select" id="unit">
+						<option value="1">每天</option>
+						<option value="2">每周</option>
+						<option value="3">每月</option>
+					</select>
+				</td>
+				<td class="detail_name">重复次数</td>
+				<td class="detail_input"><input type="text" name="" id="num"></td>
+			</tr>
+			<tr class="repeatTr" style="display:none;">
+				<td class="detail_name">开始日期</td>
+				<td class="detail_input"><input type="text" name="" readonly="readonly" id="startDate"></td>
+				<td class="detail_name">结束日期</td>
+				<td class="detail_input"><input type="text" name="" readonly="readonly" id="endDate"></td>
+			</tr>
+			<tr>
+				<td class="detail_name">会议预定联系人</td>
+				<td class="detail_input"><input type="text" name="" id="ocreservename" readonly="readonly"></td>
+				<td class="detail_name">联系方式</td>
+				<td class="detail_input"><input type="text" name="" id="ocreservephone" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td class="detail_name">会议使用联系人</td>
+				<td class="detail_input"><input type="text" name="" id="ocusename" readonly="readonly"></td>
+				<td class="detail_name">联系方式</td>
+				<td class="detail_input"><input type="text" name="" id="ocusephone" readonly="readonly"></td>
+			</tr>
+		</table>
+		<!-- 会议补充信息 -->
+		<div class="detail_title2 ac">会议补充信息<button class="take_up">[ 收起 ]</button><button class="take_up" style="display:none">[ 展开 ]</button></div>
+		<table class="detail_table myhidden">
+			<!-- <caption>会议补充信息</caption> -->
+			<tr>
+				<td class="detail_name">预定台型</td>
+				<td class="detail_input">
+					<!-- <select class="detail_select" id="taixingSelect">
+					</select> -->
+					<input type="text" name="" id="taixingSelect" readonly="readonly">
+				</td>
+				<td class="detail_name" colspan="2"></td>
+				<!-- <td class="detail_input"><input type="text" name=""></td> -->
+			</tr>
+			<tr>
+				<td class="detail_name">是否与服务人员对接</td>
+				<td class="al">
+					<label style="margin: 0;font-weight:normal;cursor:pointer;">
+						<input class="detail_input_radio" type="radio" name="order2" id="ocdockingstate1" disabled="disabled" style="cursor:pointer;"> 是
+					</label>
+					<label style="margin: 0;font-weight:normal;cursor:pointer;">
+						<input class="detail_input_radio" type="radio" name="order2" id="ocdockingstate2" disabled="disabled" style="cursor:pointer;"> 否
+					</label>
+				</td>
+				<td class="detail_name">对接时间</td>
+				<td class="detail_input"><input type="text" name="" id="ocdockingtime" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td class="detail_name">会议物资联系人</td>
+				<td class="detail_input"><input type="text" name="" id="ocmaterialsname" readonly="readonly"></td>
+				<td class="detail_name">联系方式</td>
+				<td class="detail_input"><input type="text" name="" id="ocmaterialsphone" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td class="detail_table_title al" colspan="4">车位预留情况</td>
+			</tr>
+			<tr>
+				<td class="detail_name">大车位数量</td>
+				<td class="detail_input"><input type="text" name="" id="ocbigcarnum" readonly="readonly"></td>
+				<td class="detail_name">小车位数量</td>
+				<td class="detail_input"><input type="text" name="" id="ocsmallnum" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td class="detail_table_title al" colspan="4">会议布展情况</td>
+			</tr>
+			<tr>
+				<td class="detail_name">展台</td>
+				<td class="detail_input"><input type="text" name="" id="ocshowplatform" readonly="readonly"></td>
+				<td class="detail_name">展架</td>
+				<td class="detail_input"><input type="text" name="" id="ocshowshelf" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td class="detail_name">用电功率</td>
+				<td class="detail_input"><input type="text" name="" id="ocpower" readonly="readonly"></td>
+				<td class="detail_name" colspan="2"></td>
+				<!-- <td class="detail_input"><input type="text" name=""></td> -->
+			</tr>
+		</table>
+		<table class="detail_table detail_table2 myhidden">
+			<tr>
+				<td class="detail_table_title al" colspan="6">桌签及椅背签顺序</td>
+			</tr>
+			<tr>
+				<td class="detail_input"><input type="text" name=""></td>
+				<td class="detail_input"><input type="text" name=""></td>
+				<td class="detail_input"><input type="text" name=""></td>
+				<td class="detail_input"><input type="text" name=""></td>
+				<td class="detail_input"><input type="text" name=""></td>
+				<td class="detail_input"><input type="text" name=""></td>
+			</tr>
+			<tr>
+				<td class="detail_input"><input type="text" name=""></td>
+				<td class="detail_input"><input type="text" name=""></td>
+				<td class="detail_input"><input type="text" name=""></td>
+				<td class="detail_input"><input type="text" name=""></td>
+				<td class="detail_input"><input type="text" name=""></td>
+				<td class="detail_input"><input type="text" name=""></td>
+			</tr>
+			<tr>
+				<td class="detail_name">附件</td>
+				<td class="detail_input detail_textarea" colspan="5"><textarea rows="3" readonly="readonly"></textarea></td>
+			</tr>
+			<tr>
+				<td class="detail_name">备注</td>
+				<td class="detail_input detail_textarea" colspan="5"><textarea rows="3" id="ocremark" readonly="readonly"></textarea></td>
+			</tr>
+		</table>
+		<!-- 新增物品 -->
+		<!-- <button class="detail_btn ac">添加基础会议物品</button> -->
+		<table class="detail_table">
+			<caption>基础会议物品</caption>
+			<thead>
+				<tr>
+					<td class="detail_name">物品</td>
+					<td class="detail_name">数量</td>
+					<!-- <td class="detail_name">操作</td> -->
+				</tr>
+			</thead>
+			<tbody id="baseGoods">
+			</tbody>
+		</table>
+		<!-- <button class="detail_btn ac">添加增值会议物品</button> -->
+		<table class="detail_table">
+			<caption>增值会议物品</caption>
+			<thead>
+				<tr>
+					<td class="detail_name">物品</td>
+					<td class="detail_name">单价</td>
+					<td class="detail_name">数量</td>
+					<td class="detail_name">总计</td>
+					<!-- <td class="detail_name">操作</td> -->
+				</tr>
+			</thead>
+			<tbody id="addGoods">
+			</tbody>
+		</table>
+		<!-- 展示服务人员 -->
+		<table class="detail_table" id="serPerTable" style="display:none;">
+			<caption>服务人员信息</caption>
+			<thead>
+				<tr>
+					<td class="detail_name">服务人员</td>
+					<td class="detail_name">联系方式</td>
+				</tr>
+			</thead>
+			<tbody id="serPerTbody">
+			</tbody>
+		</table>
+		<!-- 展示服务人员 end -->
+
+		<div class="ac bottom_btn">
+			<!-- <button class="detail_btn" id="submitBtn">提 交</button>
+			<button class="detail_btn cancel_btn">取 消</button> -->
+
+			<button class="detail_btn" id="dockingBtn">确 认</button>
+			<button class="detail_btn" id="back">返 回</button>
+		</div>
+	</div>
+
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/moment.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.js"></script>
+	<script src="../js/bootstrap-datetimepicker.min.js"></script>
+	<script src="../js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+	<script src="../js/member-index_look.js"></script>
+	<script>
+		$(function(){
+			$(".take_up").click(function(){
+				$(".myhidden,.take_up").toggle();
+			})
+
+			//---------------
+			eventsBind()
+		})
+		function eventsBind(){
+			//点击确认 确认对接时间
+			$("#dockingBtn").click(function(){
+				confirmDocking()
+			})
+		}
+		//确认对接时间
+		function confirmDocking(){
+			$.ajax({
+				type: "POST",
+				url: Global.host + "/order/updateButtState",
+				data:{
+					ocid:Number(Detail.ocid)
+				},
+				success: function (res) {
+					console.log(res)
+					if(Number(res)==1){
+						alert("确认成功")
+						window.history.back(-1)
+					}
+				}
+			})
+		}
+	</script>
+</body>
+</html>

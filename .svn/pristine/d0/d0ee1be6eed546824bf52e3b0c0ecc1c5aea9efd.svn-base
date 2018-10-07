@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>审批列表</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="../js/jqueryPagination/css/jquery.pagination.css">
+	<link rel="stylesheet" type="text/css" href="../css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<link rel="stylesheet" type="text/css" href="../css/list.css"/> 
+	<link rel="stylesheet" type="text/css" href="../css/service.css"/> 
+
+	<script src="../js/Global.js"></script>
+</head>
+<body>
+	<header>
+		<div class="header_logo ac fl">LOGO</div>
+		<ul class="header_menu">
+			<li><a href="../member/index.html">首页</a></li>
+			<li><a href="../member/index_list.html">我的预订</a></li>
+			<li><a href="javascript:void(0)" class="header_menu_act">审批管理</a></li>
+		</ul>
+		<div class="fr">
+			<div class="header_search" style="visibility:hidden;">
+				<span class="iconfont icon-sousuo"></span>
+				<input type="text" name="" placeholder="搜索会议室">
+			</div>
+			<!-- <div class="header_icon">
+				<span class="iconfont icon-xiaoxi"></span>
+				<div class="dian"></div>
+			</div> -->
+			<div class="header_icon">
+				<span class="iconfont icon-xiaoxi"></span>
+				<div class="dian"></div>
+				<ul class="xiaoxi" style="display: none;" id="xiaoxi">
+					<!-- <li>
+						<div class="xiaoxi_name clearfix">
+							
+							<span class="xiaoxi_date fr">时间</span>
+						</div>
+						<div class="xiaoxi_content">管理员提醒你，你的预定申请已经通过。</div>
+					</li> -->
+				</ul>
+			</div>
+			<div class="header_pic"><img src="../images/pic.jpg"></div>
+			<a class="header_icon" href="/user/dropout"><span class="iconfont icon-tuichu"></span></a>
+		</div>
+		<div style="clear: both;"></div>
+	</header>
+	<div class="main">
+		<div class="myLeft fl">
+			<div class="myLeft_room">
+				<div class="myLeft_room_title ac">审批筛选</div>
+				<div class="myLeft_tabCon">
+					<ul class="myLeft_tabCon_list">
+						<li>
+							<!-- 会议室名称 -->
+							<select id="rnameSelect">
+								<option value="">会议室名称(不限)</option>
+							</select>
+						</li>
+						<li style="position:relative;">
+							<!-- 预定时间 -->
+							<!-- <input type="text" name="" placeholder="预定时间" style="padding: 0 5px;"> -->
+							<!-- <input type="text" id="config-demo" class="content_date_input form-control"> -->
+							<input type="text" id="config-demo" class="content_date_input" placeholder="预定时间" style="margin:0;">
+						</li>
+						<li>
+							<!-- 服务人员 -->
+							<select id="sernameSelect">
+								<option value="">服务人员(不限)</option>
+							</select>
+						</li>
+						<li>
+							<!-- 审批状态 -->
+							<select id="stateSelect">
+								<option value="">审批状态(不限)</option>
+								<option value="3">待审批</option>
+								<option value="2">已通过</option>
+								<option value="1">未通过</option>
+							</select>
+						</li>
+						<li style="padding: 0;"><input class="tabCon_btn" id="searchBtn" type="submit" name="" value="确 认"></li>
+					</ul>
+				</div>	
+			</div>
+		</div>
+
+		<div class="content">
+			<ul class="button_box">
+				<li><a href="approval.html">首页</a></li>
+				<li><a href="approval_list.html">审批列表</a></li>
+				<li><a href="approval_count.html">服务统计</a></li>
+				<div style="clear: both;"></div>
+			</ul>
+			<div class="list_content">
+				<div class="table_caption"></div>
+				<table class="list_table">
+					<thead class="list_table_title">
+						<tr>
+							<td>会议室名称</td>
+							<td>预定时间</td>
+							<td>对接时间</td>
+							<td>审批状态</td>
+							<td>预定人</td>
+							<td>预定人电话</td>
+							<td>服务人员</td>
+							<td>星级评价</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+					</tbody>
+				</table>
+				<div class="ar clearfix" style="margin-top:10px;">
+					<div id="pagination3" class="page fr"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/moment.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.js"></script>
+	<script src="../js/jqueryPagination/js/jquery.pagination.min.js"></script>
+
+	<script src="../js/approval-approval_list.js"></script>
+</body>
+</html>

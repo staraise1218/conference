@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>预定详情</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="../css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<link rel="stylesheet" type="text/css" href="../css/service.css">
+	
+	<script src="../js/Global.js"></script>
+</head>
+<body>
+	<header>
+		<div class="header_logo ac fl">LOGO</div>
+		<ul class="header_menu">
+			<li><a href="../member/index.html">首页</a></li>
+			<!-- <li><a href="index_detail.html">会议室预定</a></li> -->
+			<li><a href="../member/index_list.html">我的预订</a></li>
+			<li><a href=javascript:void(0)" class="header_menu_act">服务管理</a></li>
+		</ul>
+		<div class="fr">
+			<div class="header_search" style="visibility:hidden;">
+				<span class="iconfont icon-sousuo"></span>
+				<input type="text" name="" placeholder="搜索会议室">
+			</div>
+			<div class="header_icon">
+				<span class="iconfont icon-xiaoxi"></span>
+				<div class="dian"></div>
+				<ul class="xiaoxi" style="display: none;" id="xiaoxi">
+					<!-- <li>
+						<div class="xiaoxi_name clearfix">
+							
+							<span class="xiaoxi_date fr">时间</span>
+						</div>
+						<div class="xiaoxi_content">管理员提醒你，你的预定申请已经通过。</div>
+					</li> -->
+				</ul>
+			</div>
+			<div class="header_pic"><img src="../images/pic.jpg"></div>
+			<a class="header_icon" href="/user/dropout"><span class="iconfont icon-tuichu"></span></a>
+		</div>
+		<div style="clear: both;"></div>
+	</header>
+	
+	<div class="main">
+		<div class="myLeft fl">
+			<div class="myLeft_room">
+				<div class="myLeft_room_title ac">会议室筛选</div>
+				<div class="myLeft_tabCon">
+					<ul class="myLeft_tabCon_list">
+						<li><input type="text" name="" placeholder="会议室名称" id="rnameInput"></li>
+						<li><input type="text" name="" placeholder="会议室楼号" id="rbuildingInput"></li>
+						<li><input type="text" name="" placeholder="会议室楼层" id="rfloorInput"></li>
+						<li></li>
+						<li style="padding: 0;"><input class="tabCon_btn" id="searchBtn" type="submit" name="" value="确 认"></li>
+					</ul>
+				</div>	
+			</div>
+		</div>
+
+		<div class="content" style="width: 75%">
+			<ul class="button_box">
+				<li><a href="service.html">首页</a></li>
+				<li><a href="service_list.html">服务列表</a></li>
+				<li><a href="service_manage.html">会议室管理</a></li>
+				<div style="clear: both;"></div>
+			</ul>
+			<div class="list_content" style="padding: 10px 10%;">
+				<div class="table_caption ac" id="rname-title"></div>
+				<div class="room_w">地址: <span id="address"></span></div>
+				<div class="room_w">会议室: <span id=rname></span></div>
+				<div class="room_w">预定间隔: <span id="rinterval"></span><span style="font-weight:normal;">分钟</span></div>
+				<div class="room_w">所属部门: <span id="rdepartment"></span></div>
+				<div class="room_w ac" id="rimages">
+				</div>
+				<div class="room_w">详情介绍: <p id="rintroduce"></p></div>
+			</div>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/moment.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.js"></script>
+
+	<script src="../js/service-service_room.js"></script>
+</body>
+</html>

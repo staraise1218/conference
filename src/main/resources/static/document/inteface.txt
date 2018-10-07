@@ -1,0 +1,225 @@
+1.http://localhost:8089/user/showRoomByNowWeek
+功能：根据id查询该会议室在页面当前周的订单 用于页面按照上一周下一周按钮来查询（档用户进		 来首页默认是当前时间所在的周 0为当前日期所在周）预订页面主页显示其他用户预订情况和		 上下周按钮   不包含以取消订单   isMe字段为1 是自己 
+参数：
+weekNum：
+类型：int
+语义：距离当期日期的周数
+  rid：
+  类型：int
+  语义：会议室id
+
+2.http://localhost:8089/user/showRoomByAssignWeek
+功能：根据id查询该会议室在页面  用户设定日期的   当前周的订单 用于页面按照用户自定义时间来查询 （如果用户点上一页下一页是以提交表单里的数据为基准的）预订页面主页显示其他用户预订情况和自定义时间     不包含以取消订单 格式为 yyyy-MM-dd
+参数：
+weekNum：
+类型：int
+语义：距离当期日期的周数
+  rid：
+  类型：int
+  语义：会议室id
+3.http://localhost:8089/user/reserve
+功能：页面申请一个会议室
+参数：
+Ordercontent oc：
+类型：Ordercontent 类里的参数
+语义：订单详情对象
+  otype：
+  类型：int
+  语义：是否重复预定（1.不重复 2.重复）
+  unti：
+  类型：int
+  语义：重复的单位（1.天 2.周 3.月）
+  num：
+  类型：int
+  语义：重复的数量
+返回：-1:该会议室正在被编辑 0:预定冲突 1：预定成功 
+
+4.http://localhost:8089/order/selectSimpleListByMember
+功能：查询该用户的所有定单基础信息列表
+参数：
+pageSize：
+类型：int
+语义：一页多少行
+  pageNum：
+  类型：int
+  语义：要搜索的页码
+
+5.http://localhost:8089/order/selectOneInfo
+功能：查询这个订单的详细信息
+参数：
+ocid：
+类型：int
+语义：订单详细信息id
+
+6.http://localhost:8089/order/memberUpdateOrder
+功能：取消一个订单
+参数：
+ocid：
+类型：int
+语义：订单详细信息id
+      message：
+类型：String
+语义：取消原因
+
+7.http://localhost:8089/room/selectOneRoomAndOrderByLocal
+功能：用户订会议室主页 根据用户输入的楼号、房间号等信息查询该会议室的订单信息
+参数：
+rbudingnubmer：
+类型：int
+语义：楼号
+rfloor：
+类型：int
+语义：楼层
+rhousenumber：
+类型：int
+语义：门牌号
+weekNum：
+类型：int
+语义：第几个周
+dateAssign：
+类型：int
+语义：用户自定义时间 如果为空以当时时间为基准的第几周 如果不为空 以用户设	定时间的第几周
+
+
+
+
+
+8.http://localhost:8089/room/selectOften
+功能：用户订会议室主页 查询前五条常用会议室
+
+9.http://localhost:8089/room/selectOneRoomAndOrderByRname
+功能：与7一样 只不过是用会议室名称来查询的
+参数：
+rname：
+类型：String
+语义：会议室名称
+
+weekNum：
+类型：int
+
+dateAssign：
+类型：String
+
+10.http://localhost:8089/room/dropout
+  功能：该用户退出登录
+
+11.http://localhost:8089/order/selectOneInfo
+  功能：查询一个用户订单的详细信息
+  	  参数：
+ocid：
+类型：int
+语义：订单详情id
+  返回：集合 里面有订单主体对象 + 基础会议物品 + 增值会议物品 + 我的评价（如果评价了显示 不评价不显示）
+
+
+12.http://localhost:8089/order/selectListByCheckAndDeft
+  功能：主管部门页面主页 该部门下的前六条申请列表
+  参数：
+num：
+类型：int
+语义：前几条（页面显示六条 防止需求改动 设为动态）
+
+13.http://localhost:8089/order/selectStateList
+功能：查询该部门所有各类订单状态的总数
+返回：one:未通过订单总数 two：通过订单总数 three：未审批订单总数
+
+
+14.http://localhost:8089/order/selectSimpleListByShenPi
+功能：根据医院编码和部门编码查寻列表 --------审批部门界面的列表（不需要 参数，两个编码在session中获取）用于主管部门的首页列表
+返回：  "ocdockingtime": 对接时间
+        "rname": 会议室名
+        "cmgrade": 评分
+        "tel": 预订人电话
+        "sername": 服务人
+        "ocid": 订单详情id（用于下一个页面 查看订单详情）
+        "otime": 预定时间
+        "opassstate": 是否通过（1.未通过  2.通过3.待审批  默认为3）
+        "username": 预订人名
+
+15.http://localhost:8089/room/selectRoomByHcodeAndDeptCode
+功能：根据医院编码和部门编码查寻所有的会议室 ----------用于会议室名称下拉
+返回：rname：会议室名称
+
+16.http://localhost:8089/servicepeo/selectList
+功能：查询所有的服务人员----------用于服务人员下拉
+
+17.http://localhost:8089/cplatform/selectList
+功能：查询所有台型信息------用于下拉
+返回：
+	cid;//台型id
+	cname;//台行名称
+	cpic;//台型图片
+
+18.http://localhost:8089/comment/selectServiceStatistic
+功能：查看服务统计
+参数：
+	rid：会议室id
+	beginTime：页面用户筛选的开始时间
+	endTime：页面用户筛选的结束时间
+返回：平均分、用户评论列表、会议室名称...
+
+19.http://localhost:8089/order/approveOrder
+功能：审批入口
+参数：
+	oid：订单主id
+	pass：（1.不通过 2.通过  默认未审批3）
+	message：不通过理由
+
+20.http://localhost:8089/order/selectSimpleListByFuWu
+功能：根据医院编码和审批通过状态查寻列表 --------服务部门界面的列表
+参数：
+	page：当前页码
+	pageSize：当前页码
+
+21.http://localhost:8089/order/selectApprovalScreen
+功能：主管部门筛选信息查询列表
+参数：
+	page：当前页码
+	pageSize：当前页码
+	rid:会议室id
+	beginOtime：筛选的开始时间
+	endOtime：筛选的结束时间
+	sid：人员id
+	opassstate：订单审批状态
+	
+
+22.http://localhost:8089/order/selectListByCheckAndDeft
+功能：查询该部门的前六条的预订信息（目前是六条） ---用于主管部门首页
+参数：
+	num:多少条	
+
+23.http://localhost:8089/order/selectStateList
+功能：查询订单各个状态有多少条 -----用于主管部门主页 
+返回：
+	 one:未通过 
+	 two：通过 
+	 three：未审批
+	 
+24.http://localhost:8089/order/selectStateListByService
+功能：查询服务部门的各个订单服务状态的条数 -----用于服务部门主页
+返回：
+	one.未接单
+    two.服务中
+    three.服务完成
+
+25.http://localhost:8089/order/receivingOrder
+功能：服务部门修改状态 -----可以通过此接口进行接单和完成订单操作
+参数：
+	oid：订单主表id
+	state：要成为的状态 1.未接单 2.服务中3.服务完成
+
+26.http://localhost:8089/comment/insertOneComment
+功能：插入一个评论内容
+参数：
+	Comment对象 
+返回：0.没插入成功 1.插入成功
+
+
+
+
+
+
+
+
+
+

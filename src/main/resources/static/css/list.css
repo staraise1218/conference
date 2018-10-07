@@ -1,0 +1,70 @@
+.content_list {
+    padding: 0 16.6%;
+}
+
+
+.list_table{
+	width: 100%;
+	border-collapse: inherit;
+}
+
+.list_table tbody tr:nth-child(even){
+	background-color: #fafafa;
+}
+
+.list_table tbody tr:hover{
+	border: 1px solid #02c1b2;
+	box-sizing: border-box;
+}
+.list_table tbody tr:hover td{
+	border-top: 1px solid #02c1b2;
+	border-bottom: 1px solid #02c1b2;
+}
+.list_table tbody tr:hover td:first-of-type{
+	border-left: 1px solid #02c1b2;
+}
+.list_table tbody tr:hover td:last-of-type{
+	border-right: 1px solid #02c1b2;
+}
+.list_table_title tr td{
+	padding: 4px 6px;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: #f2f7fd;
+}
+
+.list_table_btn{
+	width: 180px;
+}
+
+.list_table_s{
+	width: 100px;
+}
+
+.list_table_btn button{
+	width: 44px;
+	height: 24px;
+	margin: 2px;
+	line-height: 24px;
+	background-color: #38acff;
+	color: #fff;
+	border: none;
+	outline: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.disabled_btn{
+	background-color: #999 !important;
+}
+
+.pagination li a{
+	margin-left: 10px;
+	font-size: 16px;
+	color: #000;
+}
+
+.pagination li a:hover{
+	background-color: #02c1b2;
+	color: #fff;
+}
